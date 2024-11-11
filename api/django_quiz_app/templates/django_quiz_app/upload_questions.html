@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+
+{% block content %}
+<div class="app">
+  <a href="javascript:history.back()">
+    <img src="{% static 'django_quiz_app/images/multiple-choice.png' %}"
+    alt="Quiz - Multiple Choice" Image" />
+  </a>
+
+  <h2>Upload Questions</h2>
+
+  {% if messages %} {% for message in messages %}
+  <p
+    style="font-size: 4rem; color: {% if message.tags == 'error' %}red{% else %}green{% endif %};"
+  >
+    {{ message }}
+  </p>
+  {% endfor %} {% endif %}
+
+  <form class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
+    <button class="btn btn-ui" type="submit">Upload</button>
+  </form>
+</div>
+{% endblock %}
